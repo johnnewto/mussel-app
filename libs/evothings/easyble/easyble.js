@@ -89,7 +89,7 @@ evothings.easyble = {};
 	evothings.easyble.startScan = function(win, fail)
 	{
 		evothings.easyble.stopScan();
-		hyper.log('stop') 
+		//hyper.log('stop') 
 		internal.knownDevices = {};
 		evothings.ble.startScan(function(device)
 		{
