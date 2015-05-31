@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<title>Mussel</title>
+    <link href="assets/css/ratchet.css" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <link href="assets/css/pageslider.css" rel="stylesheet"> 
+</head>
+<body>
+
+<script id="home-tpl" type="text/template">
+		<header class="bar bar-nav">
+			<button class="btn pull-left start-scan">Start Scan</button>
+			<button class="btn pull-right stop-scan">Stop Scan</button> 
+			<h1 class="title">{{statusMessage}}</h1>
+		</header>
+		
+		<div class="bar bar-standard bar-header-secondary">
+			<input class='search-key' type="text"/>
+		</div>
+
+		<div class="content">
+		
+		</div>
+		
+		<div class="bar bar-footer">
+			<p >{{statusMessage}}</p> 
+		</div>
+
+</script>
+
+<script id="device-list-tpl" type="text/template">
+    <li class="table-view-cell media">
+        <a href="#devices/{{ address }}">
+            <!--img class="media-object pull-left" src="assets/pics/{{pic}}"-->
+            <div class="media-body">
+				<p> 
+					address = {{address}};<br> RSSI = {{rssi }};<br> Name = {{name}};<br>  
+					scanRecord = {{scanRecord}};<br> manuData = {{manuData}}  
+				</p>
+            </div>
+        </a>
+    </li>
+</script>
+
+<script id="device-tpl" type="text/template">
+    <header class="bar bar-nav">
+        <a class="btn btn-link btn-nav pull-left" href="#">
+            <span class="icon icon-left-nav"></span>
+        </a>
+
+        <h1 class="title">{{name}}</h1>
+    </header>
+
+    <div class="bar bar-standard bar-header-secondary">
+		<button class="btn btn-link btn-nav pull-left btn-volts-up">
+			<span class="icon icon-up"></span>
+			More
+		</button>
+		<h1 class="title">{{volts}} V</h1>
+		<button class="btn btn-link btn-nav pull-right btn-volts-down">
+			Less
+			<span class="icon icon-down"></span>
+		</button> 
+    </div>
+    <div class="content">
+        <div class="card">
+            <ul class="table-view">
+                <li class="table-view-cell media">
+                    <!--img class="media-object pull-left" src="assets/pics/{{pic}}"-->
+                    <div  class="media-body" >
+						<button class="btn pull-right do-blue">Blue</button> 
+						<p style="color: {{color}}"> RSSI = {{rssi }}; Name = {{name}}; scanRecord = {{scanRecord}}  </p>
+                    </div>
+                </li>
+                <li class="table-view-cell media">
+                    <a href="#ir_graph/{{ address }}" class="push-right">
+                        <span class="media-object pull-left icon icon-call"></span>
+                        <div class="media-body">
+                           IR Temperature
+							<p> 
+								raw: 0x {{temp_Raw }}; <br/>
+								Target:  {{temp_Target}} deg C  <br/>
+								Ambient: {{temp_Ambient}} deg C  <br/>
+							</p>
+                        </div>
+                    </a>
+                </li>
+                <li class="table-view-cell media">
+                    <a href="#accl_graph/{{ address }}" class="push-right">
+                        <span class="media-object pull-left icon icon-call"></span>
+                        <div class="media-body">
+                           Acceleration
+							<p> 
+								raw: 0x {{accl_Raw }}; <br/>
+								x:  {{accl_x}} G  <br/>
+								y:  {{accl_y}} G  <br/>
+								z:  {{accl_z}} G  <br/>
+							</p>
+                        </div>
+                    </a>
+                </li>  
+                <li class="table-view-cell media">
+                    <a href="#mag_graph/{{ address }}" class="push-right">
+                        <span class="media-object pull-left icon icon-call"></span>
+                        <div class="media-body">
+                           Magnetometer
+							<p> 
+								raw: 0x {{mag_Raw }}; <br/>
+								x:  {{mag_x}} &micro;T  <br/>
+								y:  {{mag_y}} &micro;T  <br/>
+								z:  {{mag_z}} &micro;T  <br/>
+							</p>
+                        </div>
+                    </a>
+                </li>  
+            </ul>
+        </div>
+		<div class="bar bar-footer">
+			<button class="btn pull-right do-connect">Connect</button> 
+			<p>{{statusMessage}}</p> 
+		</div>
+
+    </div>
+</script>
+<script>
+		// Redirect console to Evothings Workbench.
+		//if (window.hyper) { console.log = hyper.log; }
+</script>
+<script src="cordova.js"></script>
+<script src="libs/evothings/evothings.js"></script>
+<script src="libs/evothings/easyble/easyble.js"></script>
+<script src="libs/evothings/tisensortag/tisensortag.js"></script>
+<script src="libs/fastclick.js"></script>
+<script src="libs/handlebars.js"></script>
+<script src="libs/jquery.js"></script>
+<script src="libs/underscore.js"></script>
+<script src="libs/backbone.js"></script>
+<script src="libs/backbone.localStorage.js"></script>
+<script src="libs/pageslider.js"></script>
+<script src="js/models.js"></script>
+<script src="js/HomeView.js"></script>
+<script src="js/DeviceListView.js"></script>
+<script src="js/DeviceView.js"></script>
+<script src="js/BLE_Service.js"></script>
+<script src="js/SensorTagService.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
